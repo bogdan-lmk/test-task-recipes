@@ -7,11 +7,6 @@ dotenv.config()
 const router = Router();
 const BASE_URL = process.env.MEALDB_API_URL;
 
-
-// 1. Get Available Recipes
-// Example: GET /api/recipes?ingredient=chicken_breast
-//          GET /api/recipes?country=Canadian
-//          GET /api/recipes?category=Seafood
 router.get("/", async (req: Request, res: Response) => {
   try {
     const { ingredient, country, category } = req.query;
@@ -25,17 +20,15 @@ router.get("/", async (req: Request, res: Response) => {
       url = `${BASE_URL}/filter.php?c=${category}`;
     }
 
-    console.log("Fetching recipes from URL:", url); // Log the constructed URL
+    console.log("Fetching recipes from URL:", url); 
     const response = await axios.get(url);
     res.json(response.data);
   } catch (error) {
-    console.error("Error fetching recipes:", error); // Log the error details
+    console.error("Error fetching recipes:", error); =
     res.status(500).json({ error: "Unable to fetch recipes" });
   }
 });
 
-// 2. Get Detailed Recipe Info
-// Example: GET /api/recipes/52772  => /lookup.php?i=52772
 router.get("/:id", async (req: Request, res: Response) => {
   try {
     const { id } = req.params;

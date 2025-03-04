@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import recipeRoutes from "./routes/recipeRoutes";
 
-dotenv.config(); // Load .env file
+dotenv.config(); 
 
 const app: Application = express();
 const PORT = process.env.PORT || 4000;
